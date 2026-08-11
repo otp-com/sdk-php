@@ -1,15 +1,15 @@
-# OtpCom\Sdk\OTPApi
+# OtpCom\Sdk\OtpApi
 
 Send, verify, resend, and check one-time passwords.
 
-All URIs are relative to https://api.otp.com/api/v1, except if the operation defines another base path.
+All URIs are relative to https://api.otp.com, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getOtpStatus()**](OTPApi.md#getOtpStatus) | **GET** /otp/{otp_id} | Get OTP status |
-| [**resendOtp()**](OTPApi.md#resendOtp) | **POST** /otp/resend | Resend an OTP |
-| [**sendOtp()**](OTPApi.md#sendOtp) | **POST** /otp/send | Send an OTP |
-| [**verifyOtp()**](OTPApi.md#verifyOtp) | **POST** /otp/verify | Verify an OTP |
+| [**getOtpStatus()**](OtpApi.md#getOtpStatus) | **GET** /api/v1/otp/{otp_id} | Fetch the current status of an OTP. |
+| [**resendOtp()**](OtpApi.md#resendOtp) | **POST** /api/v1/otp/resend | Resend a pending OTP, escalating the channel if configured. |
+| [**sendOtp()**](OtpApi.md#sendOtp) | **POST** /api/v1/otp/send | Start an OTP: routes a channel and dispatches the code. |
+| [**verifyOtp()**](OtpApi.md#verifyOtp) | **POST** /api/v1/otp/verify | Verify a code against a pending OTP. |
 
 
 ## `getOtpStatus()`
@@ -18,7 +18,7 @@ All URIs are relative to https://api.otp.com/api/v1, except if the operation def
 getOtpStatus($otp_id): \OtpCom\Sdk\Model\OtpStatusResponse
 ```
 
-Get OTP status
+Fetch the current status of an OTP.
 
 ### Example
 
@@ -31,7 +31,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OTPApi(
+$apiInstance = new OtpCom\Sdk\Api\OtpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -43,7 +43,7 @@ try {
     $result = $apiInstance->getOtpStatus($otp_id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OTPApi->getOtpStatus: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OtpApi->getOtpStatus: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -76,9 +76,7 @@ try {
 resendOtp($resend_request): \OtpCom\Sdk\Model\OtpResponse
 ```
 
-Resend an OTP
-
-Resend a pending OTP, advancing to the next configured channel (e.g. SMS to WhatsApp).
+Resend a pending OTP, escalating the channel if configured.
 
 ### Example
 
@@ -91,7 +89,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OTPApi(
+$apiInstance = new OtpCom\Sdk\Api\OtpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -103,7 +101,7 @@ try {
     $result = $apiInstance->resendOtp($resend_request);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OTPApi->resendOtp: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OtpApi->resendOtp: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -136,9 +134,9 @@ try {
 sendOtp($send_request, $idempotency_key): \OtpCom\Sdk\Model\OtpResponse
 ```
 
-Send an OTP
+Start an OTP: routes a channel and dispatches the code.
 
-Generate a one-time password and deliver it to the recipient. The channel is chosen by your app's routing (default order + per-country overrides). Returns an `otp_id` to verify against. When routing picks WhatsApp the code is not sent yet: the response carries an `action_url` (a wa.me link) the user opens to receive the code over WhatsApp, and the OTP stays pending until they enter it. On every channel the user enters the code and you call `/otp/verify`.
+Routing picks the channel from the app config. When it selects WhatsApp the code is not sent yet: the response returns action_url (a wa.me link) the user opens to receive the code over WhatsApp, and the OTP stays pending until they enter it. On all other channels the code is delivered directly and action_url is null. Either way the user enters the code and you call POST /otp/verify.
 
 ### Example
 
@@ -151,20 +149,20 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OTPApi(
+$apiInstance = new OtpCom\Sdk\Api\OtpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $send_request = new \OtpCom\Sdk\Model\SendRequest(); // \OtpCom\Sdk\Model\SendRequest
-$idempotency_key = 'idempotency_key_example'; // string | Replays the prior response for the same key; a reused key with a different body is a 409.
+$idempotency_key = 'idempotency_key_example'; // string | Replay the prior response for a repeated request; a reused key with a different body is a 409.
 
 try {
     $result = $apiInstance->sendOtp($send_request, $idempotency_key);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OTPApi->sendOtp: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OtpApi->sendOtp: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -173,7 +171,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **send_request** | [**\OtpCom\Sdk\Model\SendRequest**](../Model/SendRequest.md)|  | |
-| **idempotency_key** | **string**| Replays the prior response for the same key; a reused key with a different body is a 409. | [optional] |
+| **idempotency_key** | **string**| Replay the prior response for a repeated request; a reused key with a different body is a 409. | [optional] |
 
 ### Return type
 
@@ -198,9 +196,7 @@ try {
 verifyOtp($verify_request): \OtpCom\Sdk\Model\VerifyResponse
 ```
 
-Verify an OTP
-
-Verify the code the user entered. `matched: true` means the code was correct.
+Verify a code against a pending OTP.
 
 ### Example
 
@@ -213,7 +209,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OTPApi(
+$apiInstance = new OtpCom\Sdk\Api\OtpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -225,7 +221,7 @@ try {
     $result = $apiInstance->verifyOtp($verify_request);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OTPApi->verifyOtp: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OtpApi->verifyOtp: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

@@ -1,10 +1,9 @@
-# SendRequest
+# ErrorResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**recipient** | **string** | Phone number (E.164) or email address to deliver the OTP to. |
-**locale** | **string** | BCP-47 locale for the message template; falls back to the app default. | [optional]
+**error** | [**\OtpCom\Sdk\Model\ErrorBody**](ErrorBody.md) |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

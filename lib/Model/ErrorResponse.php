@@ -1,6 +1,6 @@
 <?php
 /**
- * SendRequest
+ * ErrorResponse
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OtpCom\Sdk\ObjectSerializer;
 
 /**
- * SendRequest Class Doc Comment
+ * ErrorResponse Class Doc Comment
  *
  * @category Class
  * @package  OtpCom\Sdk
@@ -40,7 +40,7 @@ use \OtpCom\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'SendRequest';
+    protected static $openAPIModelName = 'ErrorResponse';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'recipient' => 'string',
-        'locale' => 'string'
+        'error' => '\OtpCom\Sdk\Model\ErrorBody'
     ];
 
     /**
@@ -69,8 +68,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'recipient' => null,
-        'locale' => null
+        'error' => null
     ];
 
     /**
@@ -79,8 +77,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'recipient' => false,
-        'locale' => true
+        'error' => false
     ];
 
     /**
@@ -169,8 +166,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'recipient' => 'recipient',
-        'locale' => 'locale'
+        'error' => 'error'
     ];
 
     /**
@@ -179,8 +175,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'recipient' => 'setRecipient',
-        'locale' => 'setLocale'
+        'error' => 'setError'
     ];
 
     /**
@@ -189,8 +184,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'recipient' => 'getRecipient',
-        'locale' => 'getLocale'
+        'error' => 'getError'
     ];
 
     /**
@@ -250,8 +244,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('recipient', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
+        $this->setIfExists('error', $data ?? [], null);
     }
 
     /**
@@ -281,21 +274,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['recipient'] === null) {
-            $invalidProperties[] = "'recipient' can't be null";
+        if ($this->container['error'] === null) {
+            $invalidProperties[] = "'error' can't be null";
         }
-        if ((mb_strlen($this->container['recipient']) > 320)) {
-            $invalidProperties[] = "invalid value for 'recipient', the character length must be smaller than or equal to 320.";
-        }
-
-        if ((mb_strlen($this->container['recipient']) < 1)) {
-            $invalidProperties[] = "invalid value for 'recipient', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!is_null($this->container['locale']) && (mb_strlen($this->container['locale']) > 10)) {
-            $invalidProperties[] = "invalid value for 'locale', the character length must be smaller than or equal to 10.";
-        }
-
         return $invalidProperties;
     }
 
@@ -312,73 +293,28 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets recipient
+     * Gets error
      *
-     * @return string
+     * @return \OtpCom\Sdk\Model\ErrorBody
      */
-    public function getRecipient()
+    public function getError()
     {
-        return $this->container['recipient'];
+        return $this->container['error'];
     }
 
     /**
-     * Sets recipient
+     * Sets error
      *
-     * @param string $recipient Phone number (E.164) or email address to deliver the OTP to.
+     * @param \OtpCom\Sdk\Model\ErrorBody $error error
      *
      * @return self
      */
-    public function setRecipient($recipient)
+    public function setError($error)
     {
-        if (is_null($recipient)) {
-            throw new \InvalidArgumentException('non-nullable recipient cannot be null');
+        if (is_null($error)) {
+            throw new \InvalidArgumentException('non-nullable error cannot be null');
         }
-        if ((mb_strlen($recipient) > 320)) {
-            throw new \InvalidArgumentException('invalid length for $recipient when calling SendRequest., must be smaller than or equal to 320.');
-        }
-        if ((mb_strlen($recipient) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $recipient when calling SendRequest., must be bigger than or equal to 1.');
-        }
-
-        $this->container['recipient'] = $recipient;
-
-        return $this;
-    }
-
-    /**
-     * Gets locale
-     *
-     * @return string|null
-     */
-    public function getLocale()
-    {
-        return $this->container['locale'];
-    }
-
-    /**
-     * Sets locale
-     *
-     * @param string|null $locale BCP-47 locale for the message template; falls back to the app default.
-     *
-     * @return self
-     */
-    public function setLocale($locale)
-    {
-        if (is_null($locale)) {
-            array_push($this->openAPINullablesSetToNull, 'locale');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('locale', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        if (!is_null($locale) && (mb_strlen($locale) > 10)) {
-            throw new \InvalidArgumentException('invalid length for $locale when calling SendRequest., must be smaller than or equal to 10.');
-        }
-
-        $this->container['locale'] = $locale;
+        $this->container['error'] = $error;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * SendRequest
+ * ErrorBody
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OtpCom\Sdk\ObjectSerializer;
 
 /**
- * SendRequest Class Doc Comment
+ * ErrorBody Class Doc Comment
  *
  * @category Class
  * @package  OtpCom\Sdk
@@ -40,7 +40,7 @@ use \OtpCom\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'SendRequest';
+    protected static $openAPIModelName = 'ErrorBody';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'recipient' => 'string',
-        'locale' => 'string'
+        'type' => 'string',
+        'message' => 'string',
+        'details' => 'array<string,mixed>'
     ];
 
     /**
@@ -69,8 +70,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'recipient' => null,
-        'locale' => null
+        'type' => null,
+        'message' => null,
+        'details' => null
     ];
 
     /**
@@ -79,8 +81,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'recipient' => false,
-        'locale' => true
+        'type' => false,
+        'message' => false,
+        'details' => false
     ];
 
     /**
@@ -169,8 +172,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'recipient' => 'recipient',
-        'locale' => 'locale'
+        'type' => 'type',
+        'message' => 'message',
+        'details' => 'details'
     ];
 
     /**
@@ -179,8 +183,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'recipient' => 'setRecipient',
-        'locale' => 'setLocale'
+        'type' => 'setType',
+        'message' => 'setMessage',
+        'details' => 'setDetails'
     ];
 
     /**
@@ -189,8 +194,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'recipient' => 'getRecipient',
-        'locale' => 'getLocale'
+        'type' => 'getType',
+        'message' => 'getMessage',
+        'details' => 'getDetails'
     ];
 
     /**
@@ -250,8 +256,9 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('recipient', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('details', $data ?? [], null);
     }
 
     /**
@@ -281,21 +288,12 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['recipient'] === null) {
-            $invalidProperties[] = "'recipient' can't be null";
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
         }
-        if ((mb_strlen($this->container['recipient']) > 320)) {
-            $invalidProperties[] = "invalid value for 'recipient', the character length must be smaller than or equal to 320.";
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
-
-        if ((mb_strlen($this->container['recipient']) < 1)) {
-            $invalidProperties[] = "invalid value for 'recipient', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!is_null($this->container['locale']) && (mb_strlen($this->container['locale']) > 10)) {
-            $invalidProperties[] = "invalid value for 'locale', the character length must be smaller than or equal to 10.";
-        }
-
         return $invalidProperties;
     }
 
@@ -312,73 +310,82 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets recipient
+     * Gets type
      *
      * @return string
      */
-    public function getRecipient()
+    public function getType()
     {
-        return $this->container['recipient'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets recipient
+     * Sets type
      *
-     * @param string $recipient Phone number (E.164) or email address to deliver the OTP to.
+     * @param string $type Machine-readable error class, e.g. \"OtpNotFoundError\".
      *
      * @return self
      */
-    public function setRecipient($recipient)
+    public function setType($type)
     {
-        if (is_null($recipient)) {
-            throw new \InvalidArgumentException('non-nullable recipient cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        if ((mb_strlen($recipient) > 320)) {
-            throw new \InvalidArgumentException('invalid length for $recipient when calling SendRequest., must be smaller than or equal to 320.');
-        }
-        if ((mb_strlen($recipient) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $recipient when calling SendRequest., must be bigger than or equal to 1.');
-        }
-
-        $this->container['recipient'] = $recipient;
+        $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets locale
+     * Gets message
      *
-     * @return string|null
+     * @return string
      */
-    public function getLocale()
+    public function getMessage()
     {
-        return $this->container['locale'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets locale
+     * Sets message
      *
-     * @param string|null $locale BCP-47 locale for the message template; falls back to the app default.
+     * @param string $message Human-readable message. Safe to log; never contains the OTP code.
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setMessage($message)
     {
-        if (is_null($locale)) {
-            array_push($this->openAPINullablesSetToNull, 'locale');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('locale', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        if (!is_null($locale) && (mb_strlen($locale) > 10)) {
-            throw new \InvalidArgumentException('invalid length for $locale when calling SendRequest., must be smaller than or equal to 10.');
-        }
+        $this->container['message'] = $message;
 
-        $this->container['locale'] = $locale;
+        return $this;
+    }
+
+    /**
+     * Gets details
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getDetails()
+    {
+        return $this->container['details'];
+    }
+
+    /**
+     * Sets details
+     *
+     * @param array<string,mixed>|null $details Structured context, present on validation errors ({loc, msg, type} per field) and a few domain errors.
+     *
+     * @return self
+     */
+    public function setDetails($details)
+    {
+        if (is_null($details)) {
+            throw new \InvalidArgumentException('non-nullable details cannot be null');
+        }
+        $this->container['details'] = $details;
 
         return $this;
     }
