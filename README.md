@@ -13,30 +13,9 @@ Requires PHP 8.1+ and Guzzle 7.
 
 ## Install
 
-Not on Packagist yet, so point Composer at the GitHub repository first:
-
 ```sh
-composer config repositories.otp-com-sdk-php vcs https://github.com/otp-com/sdk-php
-composer require otp-com/sdk-php:dev-main
+composer require otp-com/sdk-php
 ```
-
-Or the same thing in your `composer.json`:
-
-```json
-{
-  "repositories": [
-    { "type": "vcs", "url": "https://github.com/otp-com/sdk-php" }
-  ],
-  "require": {
-    "otp-com/sdk-php": "dev-main"
-  }
-}
-```
-
-`dev-main` tracks the `main` branch; `composer.lock` still pins the exact commit. If you prefer not
-to depend on a moving branch, require a commit with `dev-main#<commit-sha>`. Once the repository is
-tagged, `"otp-com/sdk-php": "^1.0"` works and the `repositories` entry can go away as soon as the
-package is on Packagist.
 
 ## Quickstart
 
