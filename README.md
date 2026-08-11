@@ -46,7 +46,7 @@ runs in sandbox. Keep it server-side; it is a bearer credential.
 ```php
 <?php
 
-use OtpCom\Sdk\Api\OTPApi;
+use OtpCom\Sdk\Api\OtpApi;
 use OtpCom\Sdk\Configuration;
 use OtpCom\Sdk\Model\SendRequest;
 use OtpCom\Sdk\Model\VerifyRequest;
@@ -54,7 +54,7 @@ use OtpCom\Sdk\Model\VerifyRequest;
 $config = Configuration::getDefaultConfiguration()
     ->setAccessToken(getenv('OTP_API_KEY'));
 
-$otp = new OTPApi(new GuzzleHttp\Client(), $config);
+$otp = new OtpApi(new GuzzleHttp\Client(), $config);
 
 // 1. Send. You pass the recipient; your account routing picks the channel.
 $sent = $otp->sendOtp(new SendRequest([
@@ -170,7 +170,7 @@ $config = Configuration::getDefaultConfiguration()
     ->setUserAgent('acme-checkout/2.1');
 
 $client = new GuzzleHttp\Client(['timeout' => 10]);
-$otp = new OTPApi($client, $config);
+$otp = new OtpApi($client, $config);
 ```
 
 Pass your own Guzzle client to control timeouts, proxies, retries, and logging middleware.
@@ -179,10 +179,10 @@ Pass your own Guzzle client to control timeouts, proxies, retries, and logging m
 
 | Method | Endpoint | Returns |
 | --- | --- | --- |
-| [`sendOtp`](./docs/Api/OTPApi.md#sendotp) | `POST /otp/send` | [`OtpResponse`](./docs/Model/OtpResponse.md) |
-| [`verifyOtp`](./docs/Api/OTPApi.md#verifyotp) | `POST /otp/verify` | [`VerifyResponse`](./docs/Model/VerifyResponse.md) |
-| [`resendOtp`](./docs/Api/OTPApi.md#resendotp) | `POST /otp/resend` | [`OtpResponse`](./docs/Model/OtpResponse.md) |
-| [`getOtpStatus`](./docs/Api/OTPApi.md#getotpstatus) | `GET /otp/{otp_id}` | [`OtpStatusResponse`](./docs/Model/OtpStatusResponse.md) |
+| [`sendOtp`](./docs/Api/OtpApi.md#sendotp) | `POST /otp/send` | [`OtpResponse`](./docs/Model/OtpResponse.md) |
+| [`verifyOtp`](./docs/Api/OtpApi.md#verifyotp) | `POST /otp/verify` | [`VerifyResponse`](./docs/Model/VerifyResponse.md) |
+| [`resendOtp`](./docs/Api/OtpApi.md#resendotp) | `POST /otp/resend` | [`OtpResponse`](./docs/Model/OtpResponse.md) |
+| [`getOtpStatus`](./docs/Api/OtpApi.md#getotpstatus) | `GET /otp/{otp_id}` | [`OtpStatusResponse`](./docs/Model/OtpStatusResponse.md) |
 
 ## Regenerating
 

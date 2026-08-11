@@ -1,24 +1,26 @@
 {
     "name": "otp-com/sdk-php",
-    "version": "1.0.0",
-    "description": "Public API for sending and verifying one-time passwords. Authenticate every request with your API key as a Bearer token. The delivery channel is chosen by your account routing; you only pass the recipient. The code itself is never returned by the API.  Errors are always `{\"error\": {\"type\", \"message\", \"details\"?}}`.  When routing picks WhatsApp the code is not sent yet: the send response carries an `action_url` (a wa.me link) the user opens to receive the code over WhatsApp, and the OTP stays pending until they enter it. Verification is identical on every channel.",
+    "description": "PHP client for the otp.com OTP API: send, verify, and resend one-time passwords.",
     "keywords": [
-        "openapitools",
-        "openapi-generator",
-        "openapi",
-        "php",
+        "otp",
+        "2fa",
+        "one-time-password",
+        "verification",
         "sdk",
-        "rest",
-        "api"
+        "api-client"
     ],
-    "homepage": "https://openapi-generator.tech",
-    "license": "unlicense",
+    "homepage": "https://github.com/otp-com/sdk-php",
+    "license": "MIT",
     "authors": [
         {
-            "name": "OpenAPI",
-            "homepage": "https://openapi-generator.tech"
+            "name": "otp.com",
+            "homepage": "https://otp.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/otp-com/sdk-php/issues",
+        "source": "https://github.com/otp-com/sdk-php"
+    },
     "require": {
         "php": "^8.1",
         "ext-curl": "*",
@@ -36,5 +38,8 @@
     },
     "autoload-dev": {
         "psr-4": { "OtpCom\\Sdk\\Test\\" : "test/" }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }

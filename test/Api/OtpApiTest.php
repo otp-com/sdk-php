@@ -40,7 +40,7 @@ use PHPUnit\Framework\TestCase;
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OTPApiTest extends TestCase
+class OtpApiTest extends TestCase
 {
 
     /**
