@@ -1,7 +1,6 @@
 .gitignore
 .php-cs-fixer.dist.php
 .travis.yml
-composer.json
 docs/Api/OtpApi.md
 docs/Model/Channel.md
 docs/Model/ErrorBody.md
@@ -32,5 +31,3 @@ lib/Model/VerifyRequest.php
 lib/Model/VerifyResponse.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ErrorBodyTest.php
-test/Model/ErrorResponseTest.php

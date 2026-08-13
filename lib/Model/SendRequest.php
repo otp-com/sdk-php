@@ -58,7 +58,8 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPITypes = [
         'recipient' => 'string',
-        'locale' => 'string'
+        'locale' => 'string',
+        'client_ip' => 'string'
     ];
 
     /**
@@ -70,7 +71,8 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPIFormats = [
         'recipient' => null,
-        'locale' => null
+        'locale' => null,
+        'client_ip' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static array $openAPINullables = [
         'recipient' => false,
-        'locale' => true
+        'locale' => true,
+        'client_ip' => true
     ];
 
     /**
@@ -170,7 +173,8 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'recipient' => 'recipient',
-        'locale' => 'locale'
+        'locale' => 'locale',
+        'client_ip' => 'client_ip'
     ];
 
     /**
@@ -180,7 +184,8 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'recipient' => 'setRecipient',
-        'locale' => 'setLocale'
+        'locale' => 'setLocale',
+        'client_ip' => 'setClientIp'
     ];
 
     /**
@@ -190,7 +195,8 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'recipient' => 'getRecipient',
-        'locale' => 'getLocale'
+        'locale' => 'getLocale',
+        'client_ip' => 'getClientIp'
     ];
 
     /**
@@ -252,6 +258,7 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('recipient', $data ?? [], null);
         $this->setIfExists('locale', $data ?? [], null);
+        $this->setIfExists('client_ip', $data ?? [], null);
     }
 
     /**
@@ -379,6 +386,40 @@ class SendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['locale'] = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Gets client_ip
+     *
+     * @return string|null
+     */
+    public function getClientIp()
+    {
+        return $this->container['client_ip'];
+    }
+
+    /**
+     * Sets client_ip
+     *
+     * @param string|null $client_ip IP address of the end user who triggered this OTP (IPv4 or IPv6). Strongly recommended: requests without it share a much tighter per-app rate limit, and it feeds abuse protection for your own traffic. Private/reserved addresses count as absent.
+     *
+     * @return self
+     */
+    public function setClientIp($client_ip)
+    {
+        if (is_null($client_ip)) {
+            array_push($this->openAPINullablesSetToNull, 'client_ip');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('client_ip', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['client_ip'] = $client_ip;
 
         return $this;
     }
