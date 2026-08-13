@@ -1,4 +1,4 @@
-# OtpCom\Sdk\OtpApi
+# OtpCom\Sdk\OTPApi
 
 Send, verify, resend, and check one-time passwords.
 
@@ -6,10 +6,10 @@ All URIs are relative to https://api.otp.com, except if the operation defines an
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getOtpStatus()**](OtpApi.md#getOtpStatus) | **GET** /api/v1/otp/{otp_id} | Fetch the current status of an OTP. |
-| [**resendOtp()**](OtpApi.md#resendOtp) | **POST** /api/v1/otp/resend | Resend a pending OTP, escalating the channel if configured. |
-| [**sendOtp()**](OtpApi.md#sendOtp) | **POST** /api/v1/otp/send | Start an OTP: routes a channel and dispatches the code. |
-| [**verifyOtp()**](OtpApi.md#verifyOtp) | **POST** /api/v1/otp/verify | Verify a code against a pending OTP. |
+| [**getOtpStatus()**](OTPApi.md#getOtpStatus) | **GET** /api/v1/otp/{otp_id} | Fetch the current status of an OTP. |
+| [**resendOtp()**](OTPApi.md#resendOtp) | **POST** /api/v1/otp/resend | Resend a pending OTP, escalating the channel if configured. |
+| [**sendOtp()**](OTPApi.md#sendOtp) | **POST** /api/v1/otp/send | Start an OTP: routes a channel and dispatches the code. |
+| [**verifyOtp()**](OTPApi.md#verifyOtp) | **POST** /api/v1/otp/verify | Verify a code against a pending OTP. |
 
 
 ## `getOtpStatus()`
@@ -31,7 +31,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OtpApi(
+$apiInstance = new OtpCom\Sdk\Api\OTPApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -43,7 +43,7 @@ try {
     $result = $apiInstance->getOtpStatus($otp_id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OtpApi->getOtpStatus: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OTPApi->getOtpStatus: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -89,7 +89,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OtpApi(
+$apiInstance = new OtpCom\Sdk\Api\OTPApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -101,7 +101,7 @@ try {
     $result = $apiInstance->resendOtp($resend_request);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OtpApi->resendOtp: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OTPApi->resendOtp: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -149,7 +149,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OtpApi(
+$apiInstance = new OtpCom\Sdk\Api\OTPApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -162,7 +162,7 @@ try {
     $result = $apiInstance->sendOtp($send_request, $idempotency_key);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OtpApi->sendOtp: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OTPApi->sendOtp: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -209,7 +209,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = OtpCom\Sdk\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OtpCom\Sdk\Api\OtpApi(
+$apiInstance = new OtpCom\Sdk\Api\OTPApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -221,7 +221,7 @@ try {
     $result = $apiInstance->verifyOtp($verify_request);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OtpApi->verifyOtp: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OTPApi->verifyOtp: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

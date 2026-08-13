@@ -1,7 +1,7 @@
 .gitignore
 .php-cs-fixer.dist.php
 .travis.yml
-docs/Api/OtpApi.md
+docs/Api/OTPApi.md
 docs/Model/Channel.md
 docs/Model/ErrorBody.md
 docs/Model/ErrorResponse.md
@@ -13,7 +13,7 @@ docs/Model/Status.md
 docs/Model/VerifyRequest.md
 docs/Model/VerifyResponse.md
 git_push.sh
-lib/Api/OtpApi.php
+lib/Api/OTPApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/FormDataProcessor.php

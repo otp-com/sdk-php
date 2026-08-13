@@ -1,6 +1,6 @@
 <?php
 /**
- * OtpApi
+ * OTPApi
  * PHP version 8.1
  *
  * @category Class
@@ -43,14 +43,14 @@ use OtpCom\Sdk\HeaderSelector;
 use OtpCom\Sdk\ObjectSerializer;
 
 /**
- * OtpApi Class Doc Comment
+ * OTPApi Class Doc Comment
  *
  * @category Class
  * @package  OtpCom\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OtpApi
+class OTPApi
 {
     /**
      * @var ClientInterface
