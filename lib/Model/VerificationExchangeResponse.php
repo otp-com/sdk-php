@@ -1,6 +1,6 @@
 <?php
 /**
- * ErrorBody
+ * VerificationExchangeResponse
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OtpCom\Sdk\ObjectSerializer;
 
 /**
- * ErrorBody Class Doc Comment
+ * VerificationExchangeResponse Class Doc Comment
  *
  * @category Class
  * @package  OtpCom\Sdk
@@ -40,7 +40,7 @@ use \OtpCom\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
+class VerificationExchangeResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ErrorBody';
+    protected static $openAPIModelName = 'VerificationExchangeResponse';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,11 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'type' => 'string',
-        'message' => 'string',
-        'details' => 'array<string,mixed>'
+        'otp_id' => 'string',
+        'recipient' => 'string',
+        'recipient_type' => '\OtpCom\Sdk\Model\RecipientType',
+        'channel' => '\OtpCom\Sdk\Model\Channel',
+        'verified_at' => '\DateTime'
     ];
 
     /**
@@ -70,9 +72,11 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'type' => null,
-        'message' => null,
-        'details' => null
+        'otp_id' => 'uuid',
+        'recipient' => null,
+        'recipient_type' => null,
+        'channel' => null,
+        'verified_at' => 'date-time'
     ];
 
     /**
@@ -81,9 +85,11 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'type' => false,
-        'message' => false,
-        'details' => false
+        'otp_id' => false,
+        'recipient' => false,
+        'recipient_type' => false,
+        'channel' => true,
+        'verified_at' => false
     ];
 
     /**
@@ -172,9 +178,11 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
-        'message' => 'message',
-        'details' => 'details'
+        'otp_id' => 'otp_id',
+        'recipient' => 'recipient',
+        'recipient_type' => 'recipient_type',
+        'channel' => 'channel',
+        'verified_at' => 'verified_at'
     ];
 
     /**
@@ -183,9 +191,11 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
-        'message' => 'setMessage',
-        'details' => 'setDetails'
+        'otp_id' => 'setOtpId',
+        'recipient' => 'setRecipient',
+        'recipient_type' => 'setRecipientType',
+        'channel' => 'setChannel',
+        'verified_at' => 'setVerifiedAt'
     ];
 
     /**
@@ -194,9 +204,11 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
-        'message' => 'getMessage',
-        'details' => 'getDetails'
+        'otp_id' => 'getOtpId',
+        'recipient' => 'getRecipient',
+        'recipient_type' => 'getRecipientType',
+        'channel' => 'getChannel',
+        'verified_at' => 'getVerifiedAt'
     ];
 
     /**
@@ -256,9 +268,11 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('otp_id', $data ?? [], null);
+        $this->setIfExists('recipient', $data ?? [], null);
+        $this->setIfExists('recipient_type', $data ?? [], null);
+        $this->setIfExists('channel', $data ?? [], null);
+        $this->setIfExists('verified_at', $data ?? [], null);
     }
 
     /**
@@ -288,11 +302,20 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+        if ($this->container['otp_id'] === null) {
+            $invalidProperties[] = "'otp_id' can't be null";
         }
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if ($this->container['recipient'] === null) {
+            $invalidProperties[] = "'recipient' can't be null";
+        }
+        if ($this->container['recipient_type'] === null) {
+            $invalidProperties[] = "'recipient_type' can't be null";
+        }
+        if ($this->container['channel'] === null && !$this->isNullableSetToNull('channel')) {
+            $invalidProperties[] = "'channel' is required";
+        }
+        if ($this->container['verified_at'] === null) {
+            $invalidProperties[] = "'verified_at' can't be null";
         }
         return $invalidProperties;
     }
@@ -310,82 +333,143 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets type
+     * Gets otp_id
      *
      * @return string
      */
-    public function getType()
+    public function getOtpId()
     {
-        return $this->container['type'];
+        return $this->container['otp_id'];
     }
 
     /**
-     * Sets type
+     * Sets otp_id
      *
-     * @param string $type Machine-readable error class, e.g. \"OtpNotFoundError\".
+     * @param string $otp_id The OTP this verification belongs to.
      *
      * @return self
      */
-    public function setType($type)
+    public function setOtpId($otp_id)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($otp_id)) {
+            throw new \InvalidArgumentException('non-nullable otp_id cannot be null');
         }
-        $this->container['type'] = $type;
+        $this->container['otp_id'] = $otp_id;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets recipient
      *
      * @return string
      */
-    public function getMessage()
+    public function getRecipient()
     {
-        return $this->container['message'];
+        return $this->container['recipient'];
     }
 
     /**
-     * Sets message
+     * Sets recipient
      *
-     * @param string $message Human-readable message. Safe to log; never contains the OTP code.
+     * @param string $recipient The recipient that was verified, in full. This is the answer the device could not be trusted to give you.
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setRecipient($recipient)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($recipient)) {
+            throw new \InvalidArgumentException('non-nullable recipient cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['recipient'] = $recipient;
 
         return $this;
     }
 
     /**
-     * Gets details
+     * Gets recipient_type
      *
-     * @return array<string,mixed>|null
+     * @return \OtpCom\Sdk\Model\RecipientType
      */
-    public function getDetails()
+    public function getRecipientType()
     {
-        return $this->container['details'];
+        return $this->container['recipient_type'];
     }
 
     /**
-     * Sets details
+     * Sets recipient_type
      *
-     * @param array<string,mixed>|null $details Structured context, present on validation errors ({loc, msg, type} per field) and a few domain errors.
+     * @param \OtpCom\Sdk\Model\RecipientType $recipient_type recipient_type
      *
      * @return self
      */
-    public function setDetails($details)
+    public function setRecipientType($recipient_type)
     {
-        if (is_null($details)) {
-            throw new \InvalidArgumentException('non-nullable details cannot be null');
+        if (is_null($recipient_type)) {
+            throw new \InvalidArgumentException('non-nullable recipient_type cannot be null');
         }
-        $this->container['details'] = $details;
+        $this->container['recipient_type'] = $recipient_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets channel
+     *
+     * @return \OtpCom\Sdk\Model\Channel|null
+     */
+    public function getChannel()
+    {
+        return $this->container['channel'];
+    }
+
+    /**
+     * Sets channel
+     *
+     * @param \OtpCom\Sdk\Model\Channel|null $channel Channel the verified code was delivered on.
+     *
+     * @return self
+     */
+    public function setChannel($channel)
+    {
+        if (is_null($channel)) {
+            array_push($this->openAPINullablesSetToNull, 'channel');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('channel', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['channel'] = $channel;
+
+        return $this;
+    }
+
+    /**
+     * Gets verified_at
+     *
+     * @return \DateTime
+     */
+    public function getVerifiedAt()
+    {
+        return $this->container['verified_at'];
+    }
+
+    /**
+     * Sets verified_at
+     *
+     * @param \DateTime $verified_at When the end user entered the correct code.
+     *
+     * @return self
+     */
+    public function setVerifiedAt($verified_at)
+    {
+        if (is_null($verified_at)) {
+            throw new \InvalidArgumentException('non-nullable verified_at cannot be null');
+        }
+        $this->container['verified_at'] = $verified_at;
 
         return $this;
     }

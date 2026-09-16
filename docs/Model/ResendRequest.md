@@ -5,6 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **otp_id** | **string** | The OTP id to resend. |
-**channel** | [**\OtpCom\Sdk\Model\Channel**](Channel.md) | Move this OTP onto a specific channel, e.g. \&quot;sms\&quot; when the recipient has no WhatsApp. The channel must be enabled for your app and the recipient. Omit to advance to the next channel in your routing order. | [optional]
+**channel** | [**\OtpCom\Sdk\Model\Channel**](Channel.md) | Move this OTP onto a specific channel, e.g. \&quot;sms\&quot; when the recipient has no WhatsApp. The channel must be enabled for your app and the recipient. Omit to advance to the next channel in your routing order, or to repeat the last one once the order is exhausted. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

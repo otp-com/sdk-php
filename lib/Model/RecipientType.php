@@ -1,6 +1,6 @@
 <?php
 /**
- * Channel
+ * RecipientType
  *
  * PHP version 8.1
  *
@@ -30,26 +30,21 @@ namespace OtpCom\Sdk\Model;
 use \OtpCom\Sdk\ObjectSerializer;
 
 /**
- * Channel Class Doc Comment
+ * RecipientType Class Doc Comment
  *
  * @category Class
- * @description Channel the OTP was dispatched on; null until routed.
  * @package  OtpCom\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class Channel
+class RecipientType
 {
     /**
      * Possible values of this enum
      */
-    public const SMS = 'sms';
-
-    public const WHATSAPP = 'whatsapp';
+    public const PHONE = 'phone';
 
     public const EMAIL = 'email';
-
-    public const TELEGRAM = 'telegram';
 
     /**
      * Gets allowable values of the enum
@@ -58,10 +53,8 @@ class Channel
     public static function getAllowableEnumValues()
     {
         return [
-            self::SMS,
-            self::WHATSAPP,
-            self::EMAIL,
-            self::TELEGRAM
+            self::PHONE,
+            self::EMAIL
         ];
     }
 }

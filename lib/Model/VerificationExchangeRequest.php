@@ -1,6 +1,6 @@
 <?php
 /**
- * ErrorBody
+ * VerificationExchangeRequest
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OtpCom\Sdk\ObjectSerializer;
 
 /**
- * ErrorBody Class Doc Comment
+ * VerificationExchangeRequest Class Doc Comment
  *
  * @category Class
  * @package  OtpCom\Sdk
@@ -40,7 +40,7 @@ use \OtpCom\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
+class VerificationExchangeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ErrorBody';
+    protected static $openAPIModelName = 'VerificationExchangeRequest';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'type' => 'string',
-        'message' => 'string',
-        'details' => 'array<string,mixed>'
+        'verification_token' => 'string'
     ];
 
     /**
@@ -70,9 +68,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'type' => null,
-        'message' => null,
-        'details' => null
+        'verification_token' => null
     ];
 
     /**
@@ -81,9 +77,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'type' => false,
-        'message' => false,
-        'details' => false
+        'verification_token' => false
     ];
 
     /**
@@ -172,9 +166,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
-        'message' => 'message',
-        'details' => 'details'
+        'verification_token' => 'verification_token'
     ];
 
     /**
@@ -183,9 +175,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
-        'message' => 'setMessage',
-        'details' => 'setDetails'
+        'verification_token' => 'setVerificationToken'
     ];
 
     /**
@@ -194,9 +184,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
-        'message' => 'getMessage',
-        'details' => 'getDetails'
+        'verification_token' => 'getVerificationToken'
     ];
 
     /**
@@ -256,9 +244,7 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('verification_token', $data ?? [], null);
     }
 
     /**
@@ -288,12 +274,17 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+        if ($this->container['verification_token'] === null) {
+            $invalidProperties[] = "'verification_token' can't be null";
         }
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if ((mb_strlen($this->container['verification_token']) > 128)) {
+            $invalidProperties[] = "invalid value for 'verification_token', the character length must be smaller than or equal to 128.";
         }
+
+        if ((mb_strlen($this->container['verification_token']) < 1)) {
+            $invalidProperties[] = "invalid value for 'verification_token', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -310,82 +301,35 @@ class ErrorBody implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets type
+     * Gets verification_token
      *
      * @return string
      */
-    public function getType()
+    public function getVerificationToken()
     {
-        return $this->container['type'];
+        return $this->container['verification_token'];
     }
 
     /**
-     * Sets type
+     * Sets verification_token
      *
-     * @param string $type Machine-readable error class, e.g. \"OtpNotFoundError\".
+     * @param string $verification_token The verification_token your app received from POST /client/otp/verify.
      *
      * @return self
      */
-    public function setType($type)
+    public function setVerificationToken($verification_token)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($verification_token)) {
+            throw new \InvalidArgumentException('non-nullable verification_token cannot be null');
         }
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string $message Human-readable message. Safe to log; never contains the OTP code.
-     *
-     * @return self
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if ((mb_strlen($verification_token) > 128)) {
+            throw new \InvalidArgumentException('invalid length for $verification_token when calling VerificationExchangeRequest., must be smaller than or equal to 128.');
         }
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets details
-     *
-     * @return array<string,mixed>|null
-     */
-    public function getDetails()
-    {
-        return $this->container['details'];
-    }
-
-    /**
-     * Sets details
-     *
-     * @param array<string,mixed>|null $details Structured context, present on validation errors ({loc, msg, type} per field) and a few domain errors.
-     *
-     * @return self
-     */
-    public function setDetails($details)
-    {
-        if (is_null($details)) {
-            throw new \InvalidArgumentException('non-nullable details cannot be null');
+        if ((mb_strlen($verification_token) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $verification_token when calling VerificationExchangeRequest., must be bigger than or equal to 1.');
         }
-        $this->container['details'] = $details;
+
+        $this->container['verification_token'] = $verification_token;
 
         return $this;
     }
